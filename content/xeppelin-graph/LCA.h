@@ -22,5 +22,5 @@ void dfs(int v, int p = -1, int h = 0) {
 	}
 	tout[v] = path.size() - 1;
 }
-int lca(int a, int b){return argmin(min(tin[a], tin[b]), max(tout[a], tout[b])).second;}
+int lca(int a, int b){return min(min(tin[a], tin[b]), max(tout[a], tout[b])).second;}
 int dist(a,b){return depth[a] + depth[b] - 2*depth[lca(a,b)];}
