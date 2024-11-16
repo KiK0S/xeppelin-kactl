@@ -15,8 +15,8 @@ for (int i = x + 1; i < MAXN; i += i & -i) f[i] += val;
 for (int i = x + 1; i > 0; i -= i & -i) ans += f[i];
 
 int pos_sum_ge(int x) { int pos = 0;
-	for (int i = (1 << MAXLOG); i >= 0; i--) {
-		if (pos + (1 << i) < MAXN && f[pos + (1 << i)] <= x) {
-			x -= f[pos + (1 << i)];
-			pos += 1 << i;									}}}
+	for (int i = (1 << MAXLOG); i > 0; i >>= 1) {
+		if (pos + i < MAXN && f[pos + i] <= x) {
+			x -= f[pos + i];
+			pos += i;									}}}
 

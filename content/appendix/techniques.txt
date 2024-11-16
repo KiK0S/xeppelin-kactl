@@ -157,3 +157,5 @@ Data structures
 	Monotone queues / monotone stacks / sliding queues
 	Sliding queue using 2 stacks
 	Persistent segment tree
+
+Answering for a group of elements and having a lower bound on the answer for each element, maybe the max of lower bounds is the answer?
