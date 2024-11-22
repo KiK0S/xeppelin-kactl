@@ -13,6 +13,7 @@ bitset<MAXW> knapsack() {
 		while (i + 1 < n && costs[i + 1] == costs[i]) i++, cnt++;
 		for (int j = 1; j <= cnt; j *= 2) {
 			items.push_back(j * costs[i]);
+			cnt -= j;
 		}
 		if (cnt > 0) items.push_back(cnt * costs[i]);
 	}
