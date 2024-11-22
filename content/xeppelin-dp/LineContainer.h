@@ -40,29 +40,3 @@ struct LineContainer : multiset<Line, less<>> {
 		return l.k * x + l.m;
 	}
 };
-
-struct LiChaoTreeNode {
-	LiChaoTreeNode *l, *r;
-	Line line;
-};
-
-void lichao_add_line(LiChaoTreeNode *v, int tl, int tr, Line l) {
-	int tm = (tl + tr) / 2; 
-	int cur = l.k * tm + l.m;
-	int vcur = v->line.k * tm + v->line.m;
-	if (cur > vcur) {
-		swap(l, v->line);
-	}
-	if (tl == tr) return;
-	// create childs of v, if havent yet
-	if (l.k < v->line.k) lichao_add_line(v->l, tl, tm, l);
-	else lichao_add_line(v->r, tm + 1, tr, l);
-}
-
-int lichao_get_max(LiChaoTreeNode *v, int tl, int tr, int x) {
-	if (tl == tr) return v->line.k * x + v->line.m;
-	int tm = (tl + tr) / 2;
-	int cur = v->line.k * x + v->line.m;
-	if (x < tm) return max(lichao_get_max(v->l, tl, tm, x), cur);
-	else return max(lichao_get_max(v->r, tm + 1, tr, x), cur);
-}
