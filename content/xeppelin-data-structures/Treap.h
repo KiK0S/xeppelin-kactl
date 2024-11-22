@@ -38,7 +38,7 @@ pair<Node*, Node*> split(Node* n, int k) {
 Node* merge(Node* l, Node* r) {
 	if (!l) return r;
 	if (!r) return l;
-	if (l->y > r->y) {
+	if (l->y > r->y) { // rand() % (size(l) + size(r)) < size(l)
 		l->r = merge(l->r, r);
 		l->recalc();
 		return l;
