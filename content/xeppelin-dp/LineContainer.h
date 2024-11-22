@@ -40,3 +40,22 @@ struct LineContainer : multiset<Line, less<>> {
 		return l.k * x + l.m;
 	}
 };
+
+// max, first * x + second
+vector<pair<ld, pair<int, int>>> cht(vector<pair<int, int>>& ln) {
+	sort(ln.begin(), ln.end(), [&](const auto& t1, const auto& t2) {
+		return make_pair(t1.first, -t1.second) < make_pair(t2.first, -t2.second);
+	});
+	vector<pair<ld, pair<int, int>>> ch;
+	for (const auto& line : ln) {
+		while (!ch.empty()) {
+			auto lst = ch.back().second;
+			if (lst.first == line.first) break;
+			ld x = (ld)(lst.second - line.second) / (line.first - lst.first);
+			if (x > ch.back().first) { ch.emplace_back(x, line); break; }
+			ch.pop_back();
+		}
+		if (ch.empty()) { ch.emplace_back(make_pair(-INF, line)); continue; }
+	}
+	return ch;
+}
