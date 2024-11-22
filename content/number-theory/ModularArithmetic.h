@@ -3,28 +3,34 @@
  * Date: 2009-09-28
  * License: CC0
  * Source: folklore
- * Description: Operators for modular arithmetic. You need to set {\tt mod} to
- * some number first and then you can use the structure.
+ * Description: Operators for modular arithmetic.
  */
 #pragma once
 
-#include "euclid.h"
-
 const ll mod = 17; // change to something else
-struct Mod {
-	ll x;
-	Mod(ll xx) : x(xx) {}
-	Mod operator+(Mod b) { return Mod((x + b.x) % mod); }
-	Mod operator-(Mod b) { return Mod((x - b.x + mod) % mod); }
-	Mod operator*(Mod b) { return Mod((x * b.x) % mod); }
-	Mod operator/(Mod b) { return *this * invert(b); }
-	Mod invert(Mod a) {
-		ll x, y, g = euclid(a.x, mod, x, y);
-		assert(g == 1); return Mod((x + mod) % mod);
+struct zet {
+	int val;
+	explicit operator int() const { return val; }
+	zet(ll x = 0) { val = (x >= -mod && x < mod ? x : x % mod); if (val < 0) val += mod; }
+	zet(ll a, ll b) { *this += a; *this /= b; }
+	zet& operator+=(zet const &b) { val += b.val; if (val >= mod) val -= mod; return *this; }
+	zet& operator-=(zet const &b) { val -= b.val; if (val < 0) val += mod; return *this; }
+	zet& operator*=(zet const &b) { val = (val * (ll)b.val) % mod; return *this; }
+	friend zet mypow(zet a, ll n) {
+		zet res = 1;
+		while (n) { if (n & 1) res *= a; a *= a; n >>= 1; }
+		return res;
 	}
-	Mod operator^(ll e) {
-		if (!e) return Mod(1);
-		Mod r = *this ^ (e / 2); r = r * r;
-		return e&1 ? *this * r : r;
-	}
+	friend zet inv(zet a) { return mypow(a, mod - 2); }
+	zet& operator/=(zet const& b) { return *this *= inv(b); }
+	friend zet operator+(zet a, const zet &b) { return a += b; }
+	friend zet operator-(zet a, const zet &b) { return a -= b; }
+	friend zet operator-(zet a) { return 0 - a; }
+	friend zet operator*(zet a, const zet &b) { return a *= b; }
+	friend zet operator/(zet a, const zet &b) { return a /= b; }
+	friend istream& operator>>(istream& stream, zet &a) { return stream >> a.val; }
+	friend ostream& operator<<(ostream& stream, const zet &a) { return stream << a.val; }
+	friend bool operator==(zet const &a, zet const &b) { return a.val == b.val; }
+	friend bool operator!=(zet const &a, zet const &b) { return a.val != b.val; }
+	friend bool operator<(zet const &a, zet const &b) { return a.val < b.val; }
 };
