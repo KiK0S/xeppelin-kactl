@@ -1,7 +1,7 @@
 /**
  * Author: kik0s
  * Date: 2024-11-16
- * Description: Flow with demands $low(e) \le f(e) \le high(e)$. Add new source $s'$ and sink $t'$ to the graph.
+ * Description: Flow with demands $d(e) \le f(e) \le c(e)$. Add new source $s'$ and sink $t'$ to the graph.
  * \begin{itemize}
  * \item $c'((s', v)) = \sum_{u \in V} d((u, v))$ for each edge $(s', v)$.
  * \item $c'((v, t')) = \sum_{w \in V} d((v, w))$ for each edge $(v, t')$.
