@@ -11,3 +11,17 @@ ll sos() { // takes 1 << n elements
                 a[mask] += a[mask ^ (1 << i)];
 }
 
+// having an array of sums of subsets, find the original array
+ll rev_sos() {
+    for (int mask = 0; mask < (1 << n); mask++) {
+		for (int i = 0; i < n; i++) {
+            dp[mask][i] = (i == 0 ? 0 : dp[mask][i - 1]);
+			if (mask & (1 << i))
+				dp[mask][i] += (i == 0 ? ans[mask ^ (1 << i)] : dp[mask ^ (1 << i)][i - 1]);
+		}
+		ans[mask] = given_sum[mask] - dp[mask][n - 1];
+		for (int i = 0; i < n; i++) {
+			dp[mask][i] += ans[mask];
+		}
+    }
+}
