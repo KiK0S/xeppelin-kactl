@@ -12,7 +12,7 @@ The wrong position will be returned if P is Point<ll> and the intersection point
 Products of three coordinates are used in intermediate steps so watch out for overflow if using int or long long.
 \end{minipage}
 \begin{minipage}{15mm}
-\includegraphics[width=\textwidth]{content/geometry/SegmentIntersection}
+\includegraphics[width=\textwidth]{content/xeppelin-geometry/SegmentIntersection}
 \end{minipage}
  * Usage:
  * vector<P> inter = segInter(s1,e1,s2,e2);

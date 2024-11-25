@@ -214,22 +214,36 @@
 \setcounter{tocdepth}{1} % Table of contents depth
 
 \pdfsuppresswarningpagegroup=1
-
 \newcommand{\maketeampage}{
 	\pagestyle{empty}
 	\setcounter{page}{0}
 	\begin{center}
 		\strut % Magic
-		\vspace{3cm}\\
-		\includegraphics[width=3cm]{\@unilogo}\\
-		{\fontsize{25}{30}\selectfont \@unilong\\}
-		{\fontsize{60}{60}\selectfont \@teamname\\}
-		\vspace{0.5cm}
-		{\huge \@teammembers\\}
+		\vspace{5cm}\\
+		\@teamname\\
+		\vspace{2cm}
+		\@teammembers\\
+		\vspace{3cm}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			Problem & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O \\ \hline
+			Opened & & & & & & & & & & & & & & & \\ \hline
+			\multicolumn{16}{|c|}{Akulyat} \\ \hline
+			Read & & & & & & & & & & & & & & & \\ \hline
+			Solved & & & & & & & & & & & & & & & \\ \hline
+			Written & & & & & & & & & & & & & & & \\ \hline
+			\multicolumn{16}{|c|}{Aarzhantsev} \\ \hline
+			Read & & & & & & & & & & & & & & & \\ \hline
+			Solved & & & & & & & & & & & & & & & \\ \hline
+			Written & & & & & & & & & & & & & & & \\ \hline
+			\multicolumn{16}{|c|}{KiK0S} \\ \hline
+			Read & & & & & & & & & & & & & & & \\ \hline
+			Solved & & & & & & & & & & & & & & & \\ \hline
+			Written & & & & & & & & & & & & & & & \\ \hline
+			\multicolumn{16}{|c|}{} \\ \hline
+			AC & & & & & & & & & & & & & & & \\ \hline
+		\end{tabular}
 		\vfill
-		{\fontsize{21}{25}\selectfont \@contestname}\\
-		\vspace{0.5cm}
-		{\huge \@contestdate}\\
 		\vspace{1cm}
 	\end{center}
 	\clearpage
