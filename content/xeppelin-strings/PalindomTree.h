@@ -2,6 +2,10 @@
  * Author: algorithmica.org
  * Description: Builds palindrome tree for a string.
 */
+
+int n, last, sz;
+// link[v] - longest palindrom suffix of v
+
 void init() {
     s[n++] = -1;
     link[0] = 1;

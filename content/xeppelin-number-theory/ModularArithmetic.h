@@ -8,29 +8,30 @@
 #pragma once
 
 const ll mod = 17; // change to something else
-struct zet {
+struct xet {
 	int val;
 	explicit operator int() const { return val; }
-	zet(ll x = 0) { val = (x >= -mod && x < mod ? x : x % mod); if (val < 0) val += mod; }
-	zet(ll a, ll b) { *this += a; *this /= b; }
-	zet& operator+=(zet const &b) { val += b.val; if (val >= mod) val -= mod; return *this; }
-	zet& operator-=(zet const &b) { val -= b.val; if (val < 0) val += mod; return *this; }
-	zet& operator*=(zet const &b) { val = (val * (ll)b.val) % mod; return *this; }
-	friend zet mypow(zet a, ll n) {
-		zet res = 1;
+	xet(ll x = 0) { val = (x >= -mod && x < mod ? x : x % mod); if (val < 0) val += mod; }
+	xet(ll a, ll b) { *this += a; *this /= b; }
+	xet& operator+=(xet const &b) { val += b.val; if (val >= mod) val -= mod; return *this; }
+	xet& operator-=(xet const &b) { val -= b.val; if (val < 0) val += mod; return *this; }
+	xet& operator*=(xet const &b) { val = (val * (ll)b.val) % mod; return *this; }
+	friend xet mypow(xet a, ll n) {
+		xet res = 1;
 		while (n) { if (n & 1) res *= a; a *= a; n >>= 1; }
 		return res;
 	}
-	friend zet inv(zet a) { return mypow(a, mod - 2); }
-	zet& operator/=(zet const& b) { return *this *= inv(b); }
-	friend zet operator+(zet a, const zet &b) { return a += b; }
-	friend zet operator-(zet a, const zet &b) { return a -= b; }
-	friend zet operator-(zet a) { return 0 - a; }
-	friend zet operator*(zet a, const zet &b) { return a *= b; }
-	friend zet operator/(zet a, const zet &b) { return a /= b; }
-	friend istream& operator>>(istream& stream, zet &a) { return stream >> a.val; }
-	friend ostream& operator<<(ostream& stream, const zet &a) { return stream << a.val; }
-	friend bool operator==(zet const &a, zet const &b) { return a.val == b.val; }
-	friend bool operator!=(zet const &a, zet const &b) { return a.val != b.val; }
-	friend bool operator<(zet const &a, zet const &b) { return a.val < b.val; }
+	friend xet inv(xet a) { return mypow(a, mod - 2); }
+	xet& operator/=(xet const& b) { return *this *= inv(b); }
+	friend xet operator+(xet a, const xet &b) { return a += b; }
+	friend xet operator-(xet a, const xet &b) { return a -= b; }
+	friend xet operator-(xet a) { return 0 - a; }
+	friend xet operator*(xet a, const xet &b) { return a *= b; }
+	friend xet operator/(xet a, const xet &b) { return a /= b; }
+	friend bool operator==(xet const &a, xet const &b) { return a.val == b.val; }
+	friend bool operator!=(xet const &a, xet const &b) { return a.val != b.val; }
+	friend bool operator<(xet const &a, xet const &b) { return a.val < b.val; }
+
+	friend istream& operator>>(istream& stream, xet &a) { return stream >> a.val; }
+	friend ostream& operator<<(ostream& stream, const xet &a) { return stream << a.val; }
 };

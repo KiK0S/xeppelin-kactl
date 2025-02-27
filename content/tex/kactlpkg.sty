@@ -145,10 +145,10 @@
 	{\normalfont\large\bfseries}}
 
 % Styles for local toc
-\titlecontents{localsection}[1.5em]{\small}{}
-	{\small}{\titlerule*[0.8em]{.}\contentspage}
-\titlecontents{localsubsection}[3.8em]{\small}{}
-	{\small}{\titlerule*[0.8em]{.}\contentspage}
+% \titlecontents{localsection}[1.5em]{\small}{}
+% 	{\small}{\titlerule*[0.8em]{.}\contentspage}
+% \titlecontents{localsubsection}[3.8em]{\small}{}
+% 	{\small}{\titlerule*[0.8em]{.}\contentspage}
 
 % Styles for main toc
 \renewcommand{\chaptermark}[1]{\markboth{\emph{ #1}}{}}
@@ -215,15 +215,11 @@
 
 \pdfsuppresswarningpagegroup=1
 \newcommand{\maketeampage}{
-	\pagestyle{empty}
+	% \pagestyle{empty}
 	\setcounter{page}{0}
-	\begin{center}
-		\strut % Magic
-		\vspace{5cm}\\
+	% \begin{center}
 		\@teamname\\
-		\vspace{2cm}
 		\@teammembers\\
-		\vspace{3cm}
 		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 			\hline
 			Problem & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O \\ \hline
@@ -245,8 +241,8 @@
 		\end{tabular}
 		\vfill
 		\vspace{1cm}
-	\end{center}
-	\clearpage
+	% \end{center}
+	% \clearpage
 	\pagestyle{fancy}
 }
 

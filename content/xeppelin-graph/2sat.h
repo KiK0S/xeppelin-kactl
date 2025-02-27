@@ -21,10 +21,15 @@ void assign_color(int v, int c /* increment c globally each dfs iteration*/) {
 	for (auto to : gr[v]) assign_color(v, c);
 }
 
+void make_edge(int v1, int v2) {
+	g[v1].push_back(v2); gr[v2].push_back(v1);
+	g[v2 ^ 1].push_back(v1 ^ 1); gr[v1 ^ 1].push_back(v2 ^ 1);
+}
+
 dfs(/* all */); reverse(topsort.begin(), topsort.end());
 assign_color(/*all*/);
 
 for (int i : vars) {
 	if (color[i] == color[negation[i]]) {}// no solution
-	else ans[i] = (color[i] < color[negation[i]] ? 1 : 0);
+	else ans[i] = (color[i] > color[negation[i]] ? 1 : 0);
 }

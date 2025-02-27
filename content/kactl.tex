@@ -9,16 +9,20 @@
 % \enablecolors
 
 \begin{document}
-	\maketeampage
 	% Small KACTL header on the first page:
 	% \maketitle{``One Last Time'' Edition}{\today}
-	\begin{multicols*}{3}
+	% \setcounter{tocdepth}{0}
 	\thispagestyle{fancy}
 	% Table of contents, without subsections:
-	% \setcounter{tocdepth}{0}
-	% \tableofcontents
-
+	\begin{minipage}{0.49\linewidth}
+	\maketeampage
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.49\linewidth}
 	\kactlchapter{xeppelin-template}
+	\end{minipage}
+	\begin{multicols*}{3}
+	% \tableofcontents
 	\kactlchapter{xeppelin-data-structures}
 	\kactlchapter{xeppelin-graph}
 	\kactlchapter{xeppelin-strings}
@@ -29,9 +33,6 @@
 	\kactlchapter{xeppelin-numerical}
 	\kactlchapter{xeppelin-geometry}
 	\kactlchapter{xeppelin-various}
-	\end{multicols*}
-
-	\begin{multicols*}{3}
 	\kactlchapter{appendix}
 	\end{multicols*}
 \end{document}

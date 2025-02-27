@@ -20,8 +20,8 @@
 #pragma once
 
 typedef ll cx; // or complex<double>
-cx g = 62; // for 998244353, 1.0 for doubles
-cx gr = modinv(g, mod);
+cx g = 31; // for mod = 998244353, n = 2 ** 23, cx(cos(2 * PI / (1 << MAXLOG)), sin(2 * PI / (1 << MAXLOG))) for doubles
+cx gr = modinv(g, mod); // or -g
 
 // input data, output data, size of input/output view, unity root, start of input view, step of input view, start of output view
 inline void fft(vector<cx> &a, vector<cx> &ans, int n, cx z, int abg, int ast, int ansbg) {
@@ -36,7 +36,7 @@ inline void fft(vector<cx> &a, vector<cx> &ans, int n, cx z, int abg, int ast, i
 		cx ans1 = ans[ansbg + i];
 		cx ans2 = ans[ansbg + i + n / 2];
 		ans[ansbg + i] = (ans1 + x * ans2) % mod;
-		ans[ansbg + i + n / 2] = (ans1 - (x * ans2) % mod + mod) % mod;
+		ans[ansbg + i + n / 2] = (ans1 - ((x * ans2) % mod) + mod) % mod;
 		x = (x * z) % mod;
 	}
 }
@@ -52,4 +52,6 @@ void multiply(vector<cx> &a, vector<cx> &b, vector<cx> &ans) {
 	for (int i = 0; i < 1 << MAXLOG; i++) {
 		ans[i] = (ans[i] * mp) % mod;
 	}
+	// also can use g in ifft + reverse(ans.begin() + 1, ans.end());
+	// use when g != 31, log != 23
 }
