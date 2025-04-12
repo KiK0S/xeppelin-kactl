@@ -8,28 +8,28 @@
  */
 #pragma once
 
-int negation(int v) {return v ^ 1;}
 vector<int> g[MAXN]; vector<int> gr[MAXN]; vector<int> topsort;
+int used[MAXN]; int color[MAXN];
+void make_or(int v1, int v2) {
+	g[v1 ^ 1].push_back(v2); gr[v2].push_back(v1 ^ 1);
+	g[v2 ^ 1].push_back(v1); gr[v1].push_back(v2 ^ 1);
+}
+
 void dfs(int v) {
 	if (used[v]) return; used[v] = 1;
-	for (auto to : g[v]) dfs(v);
+	for (auto to : g[v]) dfs(to);
 	topsort.push_back(v);
 }
 
 void assign_color(int v, int c /* increment c globally each dfs iteration*/) {
 	if (color[v]) return; color[v] = c;
-	for (auto to : gr[v]) assign_color(v, c);
-}
-
-void make_edge(int v1, int v2) {
-	g[v1].push_back(v2); gr[v2].push_back(v1);
-	g[v2 ^ 1].push_back(v1 ^ 1); gr[v1 ^ 1].push_back(v2 ^ 1);
+	for (auto to : gr[v]) assign_color(to, c);
 }
 
 dfs(/* all */); reverse(topsort.begin(), topsort.end());
 assign_color(/*all*/);
 
 for (int i : vars) {
-	if (color[i] == color[negation[i]]) {}// no solution
-	else ans[i] = (color[i] > color[negation[i]] ? 1 : 0);
+	if (color[i] == color[i ^ 1]) {}// no solution
+	else ans[i] = (color[i] > color[i ^ 1] ? 1 : 0);
 }
