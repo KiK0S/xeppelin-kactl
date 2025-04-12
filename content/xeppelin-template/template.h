@@ -31,7 +31,6 @@ signed main() {
     freopen("input.in", "r", stdin);
     freopen("output.out", "w", stdout);
     #endif
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
+    ios_base::sync_with_stdio(0); cin.tie(0);
     while (cin >> n) solve();
 }
