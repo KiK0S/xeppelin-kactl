@@ -33,4 +33,5 @@ signed main() {
     #endif
     ios_base::sync_with_stdio(0); cin.tie(0);
     while (cin >> n) solve();
+    cerr << "Runtime is: " << clock() * 1.0 / CLOCKS_PER_SEC << endl;
 }
