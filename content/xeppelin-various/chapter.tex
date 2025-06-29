@@ -9,6 +9,8 @@
 	% \kactlimport{TernarySearch.h}
 
 \section{Debugging tricks}
+\verb@g++ ... -Wl,-stack_size -Wl,1000000 -o A A.cpp@ increasing stack size locally.
+
 \verb@signal(SIGSEGV, [](int) { _Exit(0); });@ converts segfaults into Wrong Answers.
 			Similarly one can catch SIGABRT (assertion failures) and SIGFPE (zero divisions).
 
