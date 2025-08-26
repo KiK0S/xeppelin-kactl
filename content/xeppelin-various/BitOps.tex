@@ -1,0 +1,28 @@
+% File: content/misc/BitOps.tex
+% Short cheatsheet for GCC/Clang bit builtins & tricks
+% Fits KACTL style: very compact, single small box.
+\begin{center}
+\small
+\textbf{Bit builtins \& tiny hacks} \\
+\texttt{// count set bits} \\
+\texttt{int pop = \_\_builtin\_popcount(x);} \\
+\texttt{// count leading zeros} \\
+\texttt{int lz = \_\_builtin\_clz(x);} \\
+\texttt{// count trailing zeros} \\
+\texttt{int tz = \_\_builtin\_ctz(x);} \\
+\texttt{// find first set (1-based)} \\
+\texttt{int i = \_\_builtin\_ffs(x);} \\
+\texttt{// parity (1 if odd \# of 1-bits)}  \\
+\texttt{int p = \_\_builtin\_parity(x);}
+
+\textbf{Common idioms (assume unsigned integer types):} \\[3pt]
+\texttt{// isolate lowest set bit} \\ \texttt{unsigned lowbit = x \& -x;} \\[3pt]
+\texttt{// turn off lowest set bit} \\ \texttt{x \&= x - 1;} \\[3pt]
+\texttt{// index (0-based) of lowest set bit} \\ \texttt{int idx = \_\_builtin\_ctz(x);} \\[3pt]
+\texttt{// index (0-based) of highest set bit (32-bit)} \\
+\texttt{int hi = 31 - \_\_builtin\_clz(x);} \\[3pt]
+\texttt{// highest power of two $\le x$ (32-bit)} \\
+\texttt{unsigned hp = 1u << (31 - \_\_builtin\_clz(x));} \\[6pt]
+
+Use the \texttt{ll} suffix for 64-bit integers (e.g. \texttt{\_\_builtin\_popcountll}).\\
+\end{center}

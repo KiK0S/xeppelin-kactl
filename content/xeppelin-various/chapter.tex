@@ -27,20 +27,20 @@
 		
 		\verb@c = x&-x, r = x+c; (((r^x) >> 2)/c) | r@ is the next number after \texttt{x} with the same number of bits set.
 		
-		\verb@rep(b,0,K) rep(i,0,(1 << K))@ \\ \verb@  if (i & 1 << b) D[i] += D[i^(1 << b)];@ computes all sums of subsets.
 	\subsection{Pragmas}
 		\verb@#pragma GCC optimize ("Ofast")@ will make GCC auto-vectorize loops and optimizes floating points better.
 		
 		\verb@#pragma GCC target ("avx2")@ can double performance of vectorized code, but causes crashes on old machines.
 		
 		\verb@#pragma GCC optimize ("trapv")@ kills the program on integer overflows (but is really slow).
-	\subsection{FastMod}
 	\kactlimport{FastMod.h}
 	\kactlimport{FastInput.h}
 	\kactlimport{BumpAllocator.h}
 	\kactlimport{SmallPtr.h}
 	\kactlimport{BumpAllocatorSTL.h}
 	\kactlimport{pragma.h}
+	\import{BitOps.tex}
 	% \kactlimport{Unrolling.h}
-	\kactlimport{SIMD.h}
+	% \kactlimport{SIMD.h}
 	\kactlimport[-l raw]{troubleshoot.txt}
+	\kactlimport[-l raw]{practice.txt}

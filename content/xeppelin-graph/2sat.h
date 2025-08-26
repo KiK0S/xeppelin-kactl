@@ -10,9 +10,10 @@
 
 vector<int> g[MAXN]; vector<int> gr[MAXN]; vector<int> topsort;
 int used[MAXN]; int color[MAXN];
-void make_or(int v1, int v2) {
-	g[v1 ^ 1].push_back(v2); gr[v2].push_back(v1 ^ 1);
-	g[v2 ^ 1].push_back(v1); gr[v1].push_back(v2 ^ 1);
+
+void add_or(int a, int b) {
+    g[a^1].push_back(b); g[b^1].push_back(a);
+    gr[a].push_back(b^1); gr[b].push_back(a^1);
 }
 
 void dfs(int v) {
@@ -21,15 +22,21 @@ void dfs(int v) {
 	topsort.push_back(v);
 }
 
-void assign_color(int v, int c /* increment c globally each dfs iteration*/) {
+void paint(int v, int c /* increment c globally each dfs iteration*/) {
 	if (color[v]) return; color[v] = c;
-	for (auto to : gr[v]) assign_color(to, c);
+	for (auto to : gr[v]) paint(to, c);
 }
 
-dfs(/* all */); reverse(topsort.begin(), topsort.end());
-assign_color(/*all*/);
-
-for (int i : vars) {
-	if (color[i] == color[i ^ 1]) {}// no solution
-	else ans[i] = (color[i] > color[i ^ 1] ? 1 : 0);
+void 2sat() {
+	forn(i, 2*n) if (!used[i]) dfs(i);
+	reverse(all(topsort));
+	for (int i : topsort) if (!used[i]) {
+		// can skip paint if we know answer exists: earliest in topsort is assigned
+		paint(i, C); C++;
+	}
+	for (int i : vars) {
+		if (color[i] == color[i ^ 1]) { /* no solution */ }
+		else ans[i] = (color[i] > color[i ^ 1] ? 1 : 0);
+	}
 }
+

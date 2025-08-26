@@ -1,0 +1,41 @@
+Environment & Tools sanity check
+* Observe initial system state (IDE prompts, default open apps)
+* Close everything, open coding environment fresh
+* Check keyboard layout / shortcuts
+* Check monitor arrangement (if multi-screen allowed)
+* Ensure compilers / interpreters for C++, Python (and maybe Java) are available
+* Verify printing works
+* Verify internet policy (if practice allows)
+* Verify CLI compilation & submission works
+
+Problem-solving flow
+* Submit a problem successfully (hello world or trivial)
+* Try solving from teambook by retyping a known template
+* Solve a small but non-trivial problem end-to-end in each language you might use
+* Run an interactive problem (practice reading/writing to process)
+
+Debugging & Testing
+* Check that sanitizers (ASan, UBSan) are working for C++
+* ulimit -s unlimited
+* Create a stress test for a known tricky problem
+* Run local tests + compare outputs with brute force version
+* Verify ability to measure local time & memory usage
+* Run a known slow algorithm (like Floyd-Warshall on n=1000) to check TL on server
+
+Submission & System quirks
+* Submit via CLI (if possible) and from IDE, note any differences
+* Check behavior of wrong answers, RTE, TLE submissions
+* Check if rejudging or resubmitting is instant or delayed
+
+Contest logistics
+* Check scoreboard/standings view
+* Check problem printing formatting & speed
+* Make sure all team members know where the physical paper is stored
+* Test that you can compile/run even if server is under load (e.g., multiple submissions)
+* Test the toilet location
+
+Optional "gotchas"
+* Test opening PDFs, viewing images (some problems have diagrams)
+* Verify text editor search/replace works with regex if needed
+* Check that large inputs are handled well (copy-paste size limits)
+* Ensure terminal history scroll is working (no cutoff)

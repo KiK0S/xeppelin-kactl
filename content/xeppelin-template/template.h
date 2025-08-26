@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-typedef long long ll;
+
+using ll = long long;
+using ld = long double;
 
 #ifdef DEBUG
 #define var(x) cerr << #x << ": " << x << '\n';
@@ -18,6 +20,9 @@ typedef long long ll;
 #define S second
 #define all(v) v.begin(), v.end()
 #define forn(i, n) for (int i = 0; i < n; i++)
+#define vi vector<int>
+
+#define int ll
 
 const int MAXN = 1e6 + 10;
 int n;
