@@ -16,9 +16,9 @@
 	% Table of contents, without subsections:
 	\begin{minipage}{0.49\linewidth}
 	\maketeampage
-	\verb@g++ -fsanitize=undefined -fsanitize=bounds -fsanitize=array -std=c++17@ \\
+	\verb@g++ -fsanitize=undefined -fsanitize=bounds -fsanitize=address -std=c++17@ \\
 	\verb@-O2 -g -DDEBUG -o tmp template.cpp@ \\
-	\verb@ulimit -s unlimited@
+	\verb@ulimit -s ulimit -c 16000000@
 	\end{minipage}
 	\hfill
 	\begin{minipage}{0.49\linewidth}
