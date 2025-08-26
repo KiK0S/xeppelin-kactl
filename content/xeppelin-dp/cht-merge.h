@@ -1,3 +1,10 @@
+/**
+ * Author: kikos
+ * Description: CHT with merge and sum
+ * Merging just makes 2-pointers and add to new struct
+ * Sum takes minkowski sum of lines, storing
+*/
+
 struct Line {
     int k, m;
 
@@ -7,6 +14,7 @@ struct Line {
     friend bool operator < (Line a, Line b) {return a.k < b.k ||  a.k == b.k && a.m < b.m;}
 };
 struct Lines {
+// int shows where the line is optimal
 vector<pair<int, Line>> lines;
 Lines() {
     lines = {make_pair(-INF, Line{0, 0})};

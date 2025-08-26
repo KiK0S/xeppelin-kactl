@@ -11,25 +11,40 @@ int root[N], pos[N];
 int n;
 vector<int> g[N];
 
-void dfs(int v) {
-    sz[v] = 1; int mx = 0;
-    for (int i = 0; i < g[v].size(); ++i) {
-        int to = g[v][i];
+void dfs(int v, int p = -1) {
+	sz[v] = 1;
+	int id = -1;
+	for (int i = 0; i < g[v].size(); i++) {
+		int to = g[v][i];
         if (to == par[v]) {
             // remove the edge to the parent
             swap(g[v][i], g[v].back());
             g[v].pop_back(); --i; continue;
         }
-        par[to] = v; h[to] = h[v] + 1; sz[v] += sz[to];
-        dfs(to);
-        if (sz[to] > mx) {
-            heavy[v] = to, mx = sz[to];
-            swap(g[v][0], g[v][i]); // with this swap we can query subtrees too.
-        }
-    }
+		dfs(to, v);
+		if (sz[to] > sz[g[v][id]]) {
+			id = i;
+		}
+		sz[v] += sz[to];
+	}
+    if (id != -1) swap(g[v][id], g[v][0]);
 }
 
-// op(l, r) - update the answer on the path from l to r
+void build(int v, int p) {
+	if (up[v] == -1)
+		up[v] = up[p];
+	pos[timer] = v;
+	tin[v] = timer++;
+	bool f = 0;
+	for (auto to : g[v]) {
+		if (f)
+			up[to] = to;
+		build(to, v);
+		f = 1;
+	}
+	tout[v] = tin[v] + sz[v] - 1;
+}
+
 int path(int u, int v) {
     int sum = 0;
     for (; root[u] != root[v]; v = par[root[v]]) {
@@ -38,22 +53,7 @@ int path(int u, int v) {
     }
     if (h[u] > h[v]) swap(u, v);
     sum += segtree.get(pos[u], pos[v]); return sum;
+    // this works for vertices. for edges vertical paths should probably work on (l, r]
 }
 
 int subtree(int v) { return segtree.get(pos[v], pos[v] + sz[v] - 1); }
-
-void init() {
-    memset(heavy, -1, sizeof(heavy[0]) * n);
-    par[0] = -1;
-    h[0] = 0;
-    dfs(0);
-    for (int i = 0, cpos = 0; i < n; i++) {
-        if (par[i] == -1 || heavy[par[i]] != i) {
-            for (int j = i; j != -1; j = heavy[j]) {
-                root[j] = i;
-                pos[j] = cpos++;
-                segtree.upd(pos[j], val[j]);
-            }
-        }
-    }
-}

@@ -3,6 +3,7 @@
  * Date: 2015-02-06
  * License: CC0
  * Source: Folklore
+ * Description: $O(1)$ query, $O(n \log n)$ memory. If $i + 2^j > n$, it's never achievable
  * Status: stress-tested
  */
 #pragma once

@@ -16,6 +16,7 @@ for (q.push(0); !q.empty(); q.pop()) {
 		// can also do while(go[p][c] == -1) p = suflink[p]
 		// but doesnt build explisit automaton 
 		suflink[v] = go[suflink[parent[v]]][pchar[v]];
+		tree[suflink[v]].push_back(v);
 		if (go[v][c] == -1) go[v][c] = go[suflink[v]][c];
 		else q.push(go[v][c]);
 	}

@@ -10,7 +10,6 @@
 #pragma once
 
 #include <bits/extc++.h> /** keep-include */
-// To use most bits rather than just the lowest ones:
 struct chash { // large odd number for C
 	const uint64_t C = ll(4e18 * acos(0)) | 71;
 	ll operator()(ll x) const { return __builtin_bswap64(x*C); }

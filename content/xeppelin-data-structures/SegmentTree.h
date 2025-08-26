@@ -15,11 +15,4 @@ while (l != r) {
 	if (l & 1) res = min(res, t[l++]);
 	if (!(r & 1)) res = min(res, t[r--]);
 	l >>= 1, r >>= 1;}
-res = min(res, t[l]);
-
-// segtree from top:
-int tm = (tl + tr) / 2;
-if (pos <= tm) upd(2 * v, tl, tm, pos, x); else upd(2 * v + 1, tm + 1, tr, pos, x);
-t[v] = min(t[2 * v], t[2 * v + 1]);
-if (r < tl || l > tr) return 0;
-if (l <= tl && tr <= r)	return t[v];
+res = min(res, t[r]);

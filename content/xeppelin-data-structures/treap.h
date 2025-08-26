@@ -1,12 +1,9 @@
-/*
+/**
     * Author: kikos
-    * Description: Euler tour tree. Treap with support for parents
-    * The actual Euler tour part is not implemented
-    * Order of elements stored in the tree is pre + post order combined
+    * Description: Treap with support for parents
 */
 
 
-// Treap: support for 
 struct node {
     int sz, x, y, l, r, p, pc;
     node(int x = 0): x(x) {
@@ -81,12 +78,3 @@ int merge(int l, int r) {
         return r;
     }
 }
-
-// call either with iota-array or whatever you want
-pair<int, vi> treap_from_array(vi v) {
-    vi nodes(v.size());
-    forn(i, v.size()) nodes[i] = create_new_node(v[i]);
-    int root = -1; forn(i, v.size()) root = merge(root, nodes[i]);
-    return {root, nodes};
-}
-
