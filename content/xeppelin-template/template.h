@@ -8,10 +8,12 @@ using ld = long double;
 #ifdef DEBUG
 #define var(x) cerr << #x << ": " << x << '\n';
 #define range(a, b) cerr << #a << ", " << #b << ": "; for (auto _it = a; _it != b; ++_it) cerr << *_it << ' '; cerr << '\n';
+#define vrange(v) cerr << #v << ": "; for (auto _it = v.begin(); _it != v.end(); ++_it) cerr << *_it << ' '; cerr << '\n';
 #else
 #define cerr if (false) cerr
 #define var(x)
 #define range(a, b)
+#define vrange(v)
 #endif
 
 #define pii pair<int, int>

@@ -42,9 +42,9 @@ inline void fft(vector<cx> &a, vector<cx> &ans, int n, cx z, int abg, int ast, i
 
 // careful, this corrupts both a and b!
 void multiply(vector<cx> & a, vector<cx> & b) {
-    while (2 * max(a.size(), b.size()) > (1 << MAXLOG)) MAXLOG++;
-    for (int i = 0; i < (23 - MAXLOG); i++) g = (g * g) % mod;
-    a.resize((1 << MAXLOG), 0); b.resize((1 << MAXLOG), 0);
+	while (2 * max(a.size(), b.size()) > (1 << MAXLOG)) MAXLOG++;
+	for (int i = 0; i < (23 - MAXLOG); i++) g = (g * g) % mod;
+	a.resize((1 << MAXLOG), 0); b.resize((1 << MAXLOG), 0);
 	vector<cx> a_res((1 << MAXLOG), 0);
 	fft(a, a_res, 1 << MAXLOG, g, 0, 1, 0);
 	fft(b, a, 1 << MAXLOG, g, 0, 1, 0);

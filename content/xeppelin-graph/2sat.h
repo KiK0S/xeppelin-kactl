@@ -12,8 +12,8 @@ vector<int> g[MAXN]; vector<int> gr[MAXN]; vector<int> topsort;
 int used[MAXN]; int color[MAXN];
 
 void add_or(int a, int b) {
-    g[a^1].push_back(b); g[b^1].push_back(a);
-    gr[a].push_back(b^1); gr[b].push_back(a^1);
+	g[a^1].push_back(b); g[b^1].push_back(a);
+	gr[a].push_back(b^1); gr[b].push_back(a^1);
 }
 
 void dfs(int v) {

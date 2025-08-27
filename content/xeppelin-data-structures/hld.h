@@ -16,18 +16,18 @@ void dfs(int v, int p = -1) {
 	int id = -1;
 	for (int i = 0; i < g[v].size(); i++) {
 		int to = g[v][i];
-        if (to == par[v]) {
-            // remove the edge to the parent
-            swap(g[v][i], g[v].back());
-            g[v].pop_back(); --i; continue;
-        }
+		if (to == par[v]) {
+			// remove the edge to the parent
+			swap(g[v][i], g[v].back());
+			g[v].pop_back(); --i; continue;
+		}
 		dfs(to, v);
 		if (sz[to] > sz[g[v][id]]) {
 			id = i;
 		}
 		sz[v] += sz[to];
 	}
-    if (id != -1) swap(g[v][id], g[v][0]);
+	if (id != -1) swap(g[v][id], g[v][0]);
 }
 
 void build(int v, int p) {
@@ -46,14 +46,14 @@ void build(int v, int p) {
 }
 
 int path(int u, int v) {
-    int sum = 0;
-    for (; root[u] != root[v]; v = par[root[v]]) {
-        if (h[root[u]] > h[root[v]]) swap(u, v);
-        sum += segtree.get(pos[root[v]], pos[v]);
-    }
-    if (h[u] > h[v]) swap(u, v);
-    sum += segtree.get(pos[u], pos[v]); return sum;
-    // this works for vertices. for edges vertical paths should probably work on (l, r]
+	int sum = 0;
+	for (; root[u] != root[v]; v = par[root[v]]) {
+		if (h[root[u]] > h[root[v]]) swap(u, v);
+		sum += segtree.get(pos[root[v]], pos[v]);
+	}
+	if (h[u] > h[v]) swap(u, v);
+	sum += segtree.get(pos[u], pos[v]); return sum;
+	// this works for vertices. for edges vertical paths should probably work on (l, r]
 }
 
 int subtree(int v) { return segtree.get(pos[v], pos[v] + sz[v] - 1); }
