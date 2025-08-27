@@ -1,3 +1,9 @@
+/** 
+	* Author: kik0s
+	* Description: Disjoint sparse table for static queries where operation can not be split in two overlapping segments
+*/
+#pragma once
+
 lg[0] = MAXLOG - 1; for (int i = 1; i < MAXN; i++) lg[i] = lg[i >> 1] - 1;
 void build_disjoint(int level=0, int tl=0, int tr=(1 << MAXLOG) - 1) {
 	int tm = (tl + tr) / 2;int cur = inf;

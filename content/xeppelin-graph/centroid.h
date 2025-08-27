@@ -21,14 +21,10 @@ int find_centroid(int v, int sz, int lg, int p = -1) {
 	// get log n parents in decomposition (if needed)
    	cd[c][lg] = c; for (int i = 0; i < lg; i++) cd[c][i] = cd[p][i];
 	
-	// solve for all pathes that go through c
+	// solve for all paths that go through c
 	// ie do all vertical paths v -> c & c <- u
-	// careful that v and u are from different subtrees of c
-	// for (auto to : g[c]) if (!used[to]) {
-	//     solve_subtree(to, c);
-	//     match_with_previous(to, prev_combined);
-	//     merge_results(to, prev_combined);
-	// }
+	// careful that v and u should be from different subtrees of c
+
 	
 	for (auto to : g[c]) {
 		if (used[to]) continue;

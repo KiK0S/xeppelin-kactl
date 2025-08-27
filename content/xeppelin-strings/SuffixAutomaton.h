@@ -1,43 +1,54 @@
 /**
  * Author: grphil
  * Description: Builds suffix automaton for a string. For a suffix tree give a reversed string and take tree of suflinks. if debugging, use aabab
+ * Usage: int v = 0; for (auto c : s) { v = add(v, c - 'a'); }
  * Time: O(n)
  */
 
-struct node {
-  int link = -1, p = -1, len = 0;
-  char pc = '#'; map<char, int> next;
-}; node v[2 * MAXN];
 
-int add_char(int ls, char c) {
-  if (v[ls].next.find(c) != v[ls].end()) return v[ls].next[c];
-  v[++mx] = node(ls, v[ls].len + 1, c);
-  int p = ls;
-  for (; p != -1 && v[p].next.find(c) == v[p].end(); p = v[p].link)
-      v[p].next[c] = mx;
-  if (p == -1) {
-      v[mx].link = 0;
-      return mx;
-  }
-  int q = v[p].next[c];
-  if (v[q].p == p) {
-      v[mx].link = q;
-      return mx;
-  }
-  v[++mx] = node(p, v[p].len + 1, c);
-  v[mx].next = v[q].next; v[mx].link = v[q].link;
-  v[q].link = v[mx - 1].link = mx;
-  for (; p != -1 && v[p].next[c] == q; p = v[p].link)
-      v[p].next[c] = mx;
-  return mx - 1;
+struct node {
+	int to[27];
+	int p = -1, len = 0, link = -1, ans = 0, last_used = -1;
+	node() {
+		memset(to, -1, sizeof(to));
+	}
+};
+int add(int a, int ch) {
+	int b = ptr++;
+	g[b].len = g[a].len + 1;
+	g[b].p = a; g[b].link = 0;
+	while (a != -1) {
+		if (g[a].to[ch] == -1) {
+			g[a].to[ch] = b; g[b].ans += g[a].ans;
+			a = g[a].link;
+			continue;
+		}
+		int c = g[a].to[ch];
+		if (g[c].p == a) {
+			g[b].link = c;
+			break;
+		}
+		int d = ptr++;
+		for (int i = 0; i < 27; i++) g[d].to[i] = g[c].to[i];
+		g[d].ans = g[c].ans; g[d].link = g[c].link;
+    g[b].link = d; g[c].link = d; g[d].p = a;
+		g[d].len = g[a].len + 1;
+		while (a != -1 && g[a].to[ch] == c) {
+			g[a].to[ch] = d;
+			g[d].ans += g[a].ans; g[c].ans -= g[a].ans;
+			a = g[a].link;
+		}
+		break;
+	}
+	return g[g[b].p].to[ch];
 }
 
-void subautomaton(int x, int tm) {
-  if (x == -1 || used[x] == tm) return;
-
-  used[x] = tm;
-  //....
-
-  subautomaton(v[x].p, tm);
-  subautomaton(v[x].link, tm);
+void subautomaton(int v) {
+	if (v < 0 || g[v].last_used == timer) {
+		return;
+	}
+	g[v].last_used = timer;
+	g[v].ans++; // here we count strings who had this node
+	subautomaton(g[v].link);
+	subautomaton(g[v].p);
 }

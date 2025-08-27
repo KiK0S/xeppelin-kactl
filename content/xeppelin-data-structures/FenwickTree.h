@@ -1,9 +1,6 @@
 /**
- * Author: Lukas Polacek
- * Date: 2009-10-30
- * License: CC0
- * Source: folklore/TopCoder
- * Status: Stress-tested
+ * Author: kik0s
+ * Description: default fenwick lines + descend to find first pos with prefix sum $\geq x$. Note fenwick can be used on map to get free $n\log^3 n$ operations with easy implementation and it can also store segtrees/treaps
  */
 #pragma once
 

@@ -1,7 +1,7 @@
 /**
  * Author: zban
  * Description: Heavy-light decomposition.
- * To remove extra log, precache the answer for each path on the prefix, then you query prefixes in O(1) and one segment in O(log).
+ * In offline setup, to remove extra log, precache the answer for each path on the prefix, then you query prefixes in O(1) and one segment in O(log).
  */
 
 const int N = 1 << 17;
@@ -13,6 +13,7 @@ vector<int> g[N];
 
 void dfs(int v, int p = -1) {
 	sz[v] = 1;
+    par[v] = p;
 	int id = -1;
 	for (int i = 0; i < g[v].size(); i++) {
 		int to = g[v][i];
@@ -47,13 +48,14 @@ void build(int v, int p) {
 
 int path(int u, int v) {
 	int sum = 0;
-	for (; root[u] != root[v]; v = par[root[v]]) {
-		if (h[root[u]] > h[root[v]]) swap(u, v);
-		sum += segtree.get(pos[root[v]], pos[v]);
+	for (; up[u] != up[v]; v = par[up[v]]) {
+		if (h[up[u]] > h[up[v]]) swap(u, v);
+		sum += segtree.get(pos[up[v]], pos[v]);
 	}
 	if (h[u] > h[v]) swap(u, v);
 	sum += segtree.get(pos[u], pos[v]); return sum;
 	// this works for vertices. for edges vertical paths should probably work on (l, r]
+    // where in vertex we store data about edge to parent
 }
 
 int subtree(int v) { return segtree.get(pos[v], pos[v] + sz[v] - 1); }

@@ -3,24 +3,27 @@
  * Date: 2015-02-23
  * License: CC0
  * Source: http://en.wikipedia.org/wiki/Bellman-Ford_algorithm
- * Description: Calculates shortest paths from $s$ in a graph that might have negative edge weights.
- * Time: O(VE)
+ * Description: Calculates shortest paths and reconstructs a negative cycle if it exists.
  * Status: Tested on kattis:shortestpath3
  */
 #pragma once
+for (int i = 0; i < n; ++i) {
+	x = -1;
+	for (Edge e : edges) {
+		if (d[e.a] + e.cost < d[e.b]) {
+			d[e.b] = max(-INF, d[e.a] + e.cost);
+			p[e.b] = e.a;
+			x = e.b;			}}}
 
-const ll inf = LLONG_MAX;
-vector<pair<int, int>> g[MAXN];
-int dist[MAXN];
-
-void bellmanFord(int s) {
-	dist[s] = 0; // other dists = INF
-	// if possible negative cycles: for (i = 0..n) for(edge) relax(edge.to), cycle if relax is success on (n+1)th step
-	queue<int> q; vector<int> in_queue(n);
-	for (q.push(s); q.size(); q.pop()) {
-		int v = q.front(); in_queue[v] = 0;
-		for (auto [to, w] : g[v]) {
-			if (dist[to] > dist[v] + w) {
-				dist[to] = dist[v] + w; // if last iteration and detected neg. cycle -> put -inf.
-				if (!in_queue[to]) q.push(to);}}}}
-	// to determine if vertex has negative dist: for (i = 0..n) for(edge) if dist[from] = -inf {dist[to] = -inf;}
+if (x == -1)
+	cout << "No negative cycle found.";
+else {
+	for (int i = 0; i < n; ++i)
+		x = p[x];
+	for (int v = x;; v = p[v]) {
+		cycle.push_back(v);
+		if (v == x && cycle.size() > 1)
+			break;
+	}
+	reverse(cycle.begin(), cycle.end());
+}

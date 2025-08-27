@@ -36,3 +36,4 @@ int lca(vector<vi>& tbl, vi& depth, int a, int b) {
 	}
 	return tbl[0][a];
 }
+int dist(a,b){return depth[a] + depth[b] - 2*depth[lca(a,b)];}
